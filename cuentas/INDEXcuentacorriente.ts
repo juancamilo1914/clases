@@ -1,5 +1,5 @@
 import { Cuenta } from "./cuentacorriente";
-// Ejemplo de uso
+
 const cuentaCorriente = new Cuenta(500, 3);
 cuentaCorriente.imprimir();
 

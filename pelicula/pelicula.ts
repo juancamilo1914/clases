@@ -8,14 +8,19 @@ export class Pelicula {
     private duracion:number
     private año:number
     private calificacion:number
-    
-    constructor(nombre:string ,director:string ,genero:Tipo ,duracion:number ,año:number, calificacion:number){
+    private disponible: boolean;
+    private peliculas: Pelicula[];
+
+
+    constructor(nombre:string ,director:string ,genero:Tipo ,duracion:number ,año:number, calificacion:number, disponible:boolean){
         this.nombre=nombre;
         this.director = director ;
         this.genero = genero;
         this.duracion  = duracion;
         this.año = año;
         this.calificacion = calificacion;
+        this.disponible = disponible;
+        this.peliculas = [];
     }
 
     getNombre (){
@@ -53,17 +58,56 @@ export class Pelicula {
     }
     setCalificacion (calificacion:number){
         this.calificacion = calificacion
+        console.log('---------------------')
     }
 
     private esPeliculaEpica(): boolean {
-        return this.duracion >= 3;
+        return this.calificacion >= 5;
+        console.log('---------------------')
     }
 
     public obtenerValoracion(): string {
         if (this.esPeliculaEpica()) {
             return "¡Esta película es épica!";
+    console.log('---------------------')
         } else {
             return "Esta película no es épica.";
         }
-} 
+    console.log('---------------------')
+    }
+    public alquilar(): void {
+        if (this.disponible) {
+            console.log(`La película '${this.nombre}' ha sido alquilada.`);
+            this.disponible = false;
+         console.log('---------------------')
+        } else {
+            console.log(`La película '${this.nombre}' no está disponible para alquilar.`);
+        }
+        console.log('---------------------')
+    }
+
+    public devolver(): void {
+        if (!this.disponible) {
+            console.log(`La película '${this.nombre}' ha sido devuelta.`);
+            this.disponible = true;
+            console.log('---------------------')
+        } else {
+            console.log(`La película '${this.nombre}' ya estaba disponible.`);
+        }
+        console.log('---------------------')
+    }
+    public agregarPelicula(pelicula: Pelicula): void {
+        this.peliculas.push(pelicula);
+        console.log('---------------------')
+    }
+
+    public mostrarCarteleraDisponible(): void {
+        console.log("Películas disponibles:");
+        for (let Pelicula of this.peliculas) {
+            if (Pelicula.disponible) {
+                console.log(Pelicula.nombre);
+                console.log('---------------------')
+            }
+        }
+    }
 }
